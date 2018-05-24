@@ -10,6 +10,9 @@
           {{ item.title }}</v-btn>
       </v-toolbar-items>
     </v-toolbar>
+    <main>
+      <router-view></router-view>
+    </main>
       <v-navigation-drawer v-model="drawer">
         <v-list>
           <v-list-tile v-for="item in menuItems" :key="item.title">
@@ -20,9 +23,6 @@
           </v-list-tile>
         </v-list>
       </v-navigation-drawer>
-    <main>
-      <router-view></router-view>
-    </main>
   </v-app>
 </template>
 

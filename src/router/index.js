@@ -40,5 +40,6 @@ export default new Router({
       name: 'Signin',
       component: Signin
     }
-  ]
+  ],
+  mode: 'history'
 })
