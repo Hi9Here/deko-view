@@ -7,10 +7,13 @@ import router from './router'
 import Vuetify from 'vuetify'
 import 'vuetify/dist/vuetify.min.css'
 import { store } from './store'
+import AlertCmp from './components/shared/Alert.vue'
 
 Vue.use(Vuetify)
 
 Vue.config.productionTip = false
+
+Vue.component('app-alert', AlertCmp)
 
 /* eslint-disable no-new */
 new Vue({
