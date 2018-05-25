@@ -2,6 +2,7 @@
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
 import App from './App'
+import * as firebase from 'firebase'
 import router from './router'
 import Vuetify from 'vuetify'
 import 'vuetify/dist/vuetify.min.css'
@@ -17,5 +18,14 @@ new Vue({
   router,
   store,
   components: { App },
-  template: '<App/>'
+  template: '<App/>',
+  created() {
+    firebase.initializeApp({
+      apiKey: 'AIzaSyDiXAmAbzhAJx02ctlSiyUqX2_lAP2xPjw',
+      authDomain: 'deko-fit-dev.firebaseapp.com',
+      databaseURL: 'https://deko-fit-dev.firebaseio.com',
+      projectId: 'deko-fit-dev',
+      storageBucket: 'deko-fit-dev.appspot.com'
+    })
+  }
 })
