@@ -40,13 +40,25 @@ export default {
   data () {
     return {
       drawer: false,
-      menuItems: [
-        { icon: 'fitness_center', title: 'Exercises', link: '/exercises'},
-        { icon: 'room', title: 'New Exercise', link: 'exercises/new'},
-        { icon: 'person', title: 'Profile', link: '/profile'},
+    }
+  },
+  computed: {
+    menuItems () {
+      let  menuItems = [
         { icon: 'face', title: 'Sign Up', link: 'signup'},
         { icon: 'lock_open', title: 'Sign In', link: 'signin'}
       ]
+      if (this.userIsAuthenticated) {
+        menuItems =  [
+        { icon: 'fitness_center', title: 'Exercises', link: '/exercises'},
+        { icon: 'room', title: 'New Exercise', link: 'exercises/new'},
+        { icon: 'person', title: 'Profile', link: '/profile'},
+        ]     
+      }
+      return menuItems
+    },
+    userIsAuthenticated () {
+      return this.$store.getters.user !== null && this.$store.getters.user !== undefined
     }
   }
 }

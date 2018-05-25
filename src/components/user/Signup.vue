@@ -69,12 +69,22 @@
       comparePasswords () {
         // TODO
         return this.password !== this.confirmPassword ? 'Passwords do not match' : ''
+      },
+      user () {
+        return this.$store.getters.user
+      }
+    },
+    watch: {
+      user (value) {
+        if (value !== null && value !== undefined) {
+          this.$router.push('/')
+        }
       }
     },
     methods: {
       onSignup () {
-        // Vuex
-        console.log({email: this.email, password: this.password, confirmPassword: this.confirmPassword});
+        this.$store.dispatch('signUserUp', {email: this.email, password: this.password})
+        
       }
     }
   }
