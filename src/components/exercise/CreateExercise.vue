@@ -94,9 +94,6 @@
     },
     methods: {
       onCreateExercise () {
-        if (!formValid) {
-          return
-        }
         const exerciseDate = {
           title: this.title,
           freq: this.freq,
@@ -104,7 +101,7 @@
           description: this.description
         }
         this.$store.dispatch('createExercise', exerciseDate)
-        this.$store.push('/exercises')
+        this.$router.push('/exercises')
       }
     }
   }
