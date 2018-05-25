@@ -33,12 +33,9 @@
 
 <script>
   export default {
-    data () {
-      return {
-        exercises: [
-          { imageUrl: 'http://cdn2.coachmag.co.uk/sites/coachmag/files/2017/05/bench-press_0.jpg', id: 'cdfgshdjf', title: 'Chest Press'},
-          { imageUrl: 'http://www.ibodz.com/files/exerciseimages/abdominal-crunch-with-raised-legs-1.JPG', id: 'fgdhfj', title: 'Ab Crunch'}
-        ]
+    computed: {
+      exercises () {
+        return this.$store.getters.featuredExercises
       }
     },
     methods: {
