@@ -47,15 +47,20 @@ export const store = new Vuex.Store({
   actions: {
     createExercise({ commit }, payload) {
       const exercise = {
-          title: payload.title,
-          freq: payload.freq,
-          imageUrl: payload.imageUrl,
-          description: payload.description,
-          muscle: payload.muscle,
-          id: 'dwefgdhdjg'
-        }
-        // Reach out to Firebase and store it
-      commit('createExercise', exercise)
+        title: payload.title,
+        freq: payload.freq,
+        imageUrl: payload.imageUrl,
+        description: payload.description,
+        muscle: payload.muscle
+      }
+      firebase.database().ref('exercises').push(exercise)
+        .then((data) => {
+          console.log(data)
+          commit('createExercise', exercise)
+        })
+        .catch((error) => {
+          console.log(error)
+        })
     },
     signUserUp({ commit }, payload) {
       commit('setLoading', true)
