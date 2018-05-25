@@ -14,15 +14,15 @@
             </v-card-media>
             <v-card-text>
               <div>
-                Push bar up and down
+                {{ exercise.description }}
               </div>
               <div>
-                Frequency {{ exercise.freq }}
+                {{ exercise.muscle }}
               </div>
             </v-card-text>
             <v-card-actions>
               <v-spacer></v-spacer>
-              <v-btn>Register</v-btn>
+              <v-btn>Add</v-btn>
             </v-card-actions>
         </v-card>
       </v-flex>

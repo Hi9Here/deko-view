@@ -50,6 +50,18 @@
           <v-layout row>
             <v-flex xs12 sm6 offset-sm3>
               <v-text-field
+              name="muscle"
+              label="Body Part"
+              id="muscle"
+              v-model="muscle"
+              required
+              >
+              </v-text-field>
+            </v-flex>
+          </v-layout>
+          <v-layout row>
+            <v-flex xs12 sm6 offset-sm3>
+              <v-text-field
               name="description"
               label="Description"
               id="description"
@@ -80,6 +92,7 @@
         title: '',
         freq: 0,
         imageUrl: '',
+        muscle: '',
         description: ''
       }
     },
@@ -98,6 +111,7 @@
           title: this.title,
           freq: this.freq,
           imageUrl: this.imageUrl,
+          muscle: this.muscle,
           description: this.description
         }
         this.$store.dispatch('createExercise', exerciseDate)

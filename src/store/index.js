@@ -9,13 +9,17 @@ export const store = new Vuex.Store({
         imageUrl: 'http://cdn2.coachmag.co.uk/sites/coachmag/files/2017/05/bench-press_0.jpg',
         id: 'cdfgshdjf',
         title: 'Chest Press',
-        freq: 3
+        freq: 3,
+        muscle: 'Upper',
+        description: 'Just some text that I am throwing in'
       },
       {
         imageUrl: 'http://www.ibodz.com/files/exerciseimages/abdominal-crunch-with-raised-legs-1.JPG',
         id: 'fgdhfj',
         title: 'Ab Crunch',
-        freq: 2
+        freq: 2,
+        muscle: 'Middle',
+        description: 'This is the ab crunch text, just so you know'
       }
     ],
     user: {
@@ -35,6 +39,7 @@ export const store = new Vuex.Store({
           freq: payload.freq,
           imageUrl: payload.imageUrl,
           description: payload.description,
+          muscle: payload.muscle,
           id: 'dwefgdhdjg'
         }
         // Reach out to Firebase and store it
