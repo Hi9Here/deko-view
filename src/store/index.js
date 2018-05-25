@@ -23,8 +23,24 @@ export const store = new Vuex.Store({
       registeredExercsies: ['fgdhfj']
     }
   },
-  mutations: {},
-  actions: {},
+  mutations: {
+    createExercise(state, payload) {
+      state.loadedExercises.push(payload)
+    }
+  },
+  actions: {
+    createExercise({ commit }, payload) {
+      const exercise = {
+          title: payload.title,
+          freq: payload.freq,
+          imageUrl: payload.imageUrl,
+          description: payload.description,
+          id: 'dwefgdhdjg'
+        }
+        // Reach out to Firebase and store it
+      commit('createExercise', exercise)
+    }
+  },
   getters: {
     // Changed with 
     loadedExercises(state) {
