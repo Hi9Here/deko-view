@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import Home from '@/components/Home'
 import Exercises from '@/components/exercise/Exercises'
 import CreateExercise from '@/components/exercise/CreateExercise'
+import Exercise from '@/components/exercise/Exercise'
 import Profile from '@/components/user/Profile'
 import Signin from '@/components/user/Signin'
 import Signup from '@/components/user/Signup'
@@ -24,6 +25,11 @@ export default new Router({
       path: '/exercises/new',
       name: 'CreateExercise',
       component: CreateExercise
+    },
+    {
+      path: '/exercises/:id',
+      name: 'Exercise',
+      component: Exercise
     },
     {
       path: '/Profile',

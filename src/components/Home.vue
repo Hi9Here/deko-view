@@ -10,14 +10,15 @@
     </v-layout>
     <v-layout row wrap>
       <v-flex xs12>
-        <v-carousel>
+        <v-carousel style="cursor: pointer;">
           <v-carousel-item 
-          v-for="exercise in exercises" 
-          :src="exercise.imageUrl" 
-          :key="exercise.id">
-          <div class="title">
-              {{ exercise.title }}
-          </div>
+            v-for="exercise in exercises" 
+            :src="exercise.imageUrl" 
+            :key="exercise.id"
+            @click.native="onLoadExercise(exercise.id)">
+            <div class="title">
+                {{ exercise.title }}
+            </div>
           </v-carousel-item>
         </v-carousel>
       </v-flex>
@@ -39,6 +40,11 @@
           { imageUrl: 'http://www.ibodz.com/files/exerciseimages/abdominal-crunch-with-raised-legs-1.JPG', id: 'fgdhfj', title: 'Ab Crunch'}
         ]
       }
+    },
+    methods: {
+      onLoadExercise (id) {
+        this.$router.push('/exercises/' + id)
+      } 
     }
   }
 </script>
