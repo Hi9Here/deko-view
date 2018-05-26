@@ -107,14 +107,15 @@
     },
     methods: {
       onCreateExercise () {
-        const exerciseDate = {
+        const exerciseData = {
           title: this.title,
           freq: this.freq,
           imageUrl: this.imageUrl,
           muscle: this.muscle,
           description: this.description
         }
-        this.$store.dispatch('createExercise', exerciseDate)
+        console.log(exerciseData);
+        this.$store.dispatch('createExercise', exerciseData )
         this.$router.push('/exercises')
       }
     }

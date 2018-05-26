@@ -7,6 +7,7 @@ import Exercise from '@/components/exercise/Exercise'
 import Profile from '@/components/user/Profile'
 import Signin from '@/components/user/Signin'
 import Signup from '@/components/user/Signup'
+import AuthGuard from './auth-guard'
 
 Vue.use(Router)
 
@@ -24,7 +25,8 @@ export default new Router({
     {
       path: '/exercises/new',
       name: 'CreateExercise',
-      component: CreateExercise
+      component: CreateExercise,
+      beforeEnter: AuthGuard
     },
     {
       path: '/exercises/:id',
@@ -35,7 +37,8 @@ export default new Router({
     {
       path: '/Profile',
       name: 'Profile',
-      component: Profile
+      component: Profile,
+      beforeEnter: AuthGuard
     },
     {
       path: '/Signup',

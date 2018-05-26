@@ -30,5 +30,11 @@ new Vue({
       projectId: 'deko-fit-dev',
       storageBucket: 'deko-fit-dev.appspot.com'
     })
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        this.$store.dispatch('autoSignIn', user)
+      }
+    })
+    this.$store.dispatch('loadExercises')
   }
 })

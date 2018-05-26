@@ -28,6 +28,9 @@ export const store = new Vuex.Store({
     error: null
   },
   mutations: {
+    setLoadedExercises(state, payload) {
+      state.loadedExercises = payload
+    },
     createExercise(state, payload) {
       state.loadedExercises.push(payload)
     },
@@ -45,21 +48,53 @@ export const store = new Vuex.Store({
     }
   },
   actions: {
-    createExercise({ commit }, payload) {
+    loadExercises({ commit }) {
+      commit('setLoading', true)
+      firebase.database().ref('exercises').once('value')
+        .then((data) => {
+          const exercises = []
+          const obj = data.val()
+          for (let key in obj) {
+            exercises.push({
+              id: key,
+              title: obj[key].title,
+              description: obj[key].description,
+              imageUrl: obj[key].imageUrl,
+              muscle: obj[key].muscle,
+              freq: obj[key].freq,
+              creatorId: obj[key].creatorId
+            })
+          }
+          commit('setLoadedExercises', exercises)
+          commit('setLoading', false)
+        })
+        .catch(
+          (error) => {
+            console.log(error)
+            commit('setLoading', true)
+          }
+        )
+    },
+    createExercise({ commit, getters }, payload) {
       const exercise = {
         title: payload.title,
         freq: payload.freq,
         imageUrl: payload.imageUrl,
         description: payload.description,
-        muscle: payload.muscle
+        muscle: payload.muscle,
+        creatorId: getters.user.id
       }
       firebase.database().ref('exercises').push(exercise)
         .then((data) => {
-          console.log(data)
-          commit('createExercise', exercise)
+          const key = data.key
+          commit('createExercise', {
+            ...exercise,
+            id: key
+          })
         })
         .catch((error) => {
           console.log(error)
+          commit('setLoading', false)
         })
     },
     signUserUp({ commit }, payload) {
@@ -105,6 +140,13 @@ export const store = new Vuex.Store({
             console.log(error)
           }
         )
+    },
+    autoSignIn({ commit }, payload) {
+      commit('setUser', { id: payload.uid, registeredExercsies: [] })
+    },
+    logout({ commit }) {
+      firebase.auth().signOut()
+      commit('setUser', null)
     },
     clearError({ commit }) {
       commit('clearError')

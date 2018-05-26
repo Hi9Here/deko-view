@@ -8,7 +8,18 @@
         <v-btn large router to="/exercises/new" dark class="blue darken-2">Create Exercise</v-btn>
       </v-flex>
     </v-layout>
-    <v-layout row wrap>
+    <v-layout>
+      <v-flex xs-12 class="text-xs-center">
+        <v-progress-circular 
+          indeterminate 
+          color="primary"
+          :width="7"
+          :size="70"
+          v-if="loading">
+        </v-progress-circular>
+      </v-flex>
+    </v-layout>
+    <v-layout row wrap class="mt-2" v-if="!loading">
       <v-flex xs12>
         <v-carousel style="cursor: pointer;">
           <v-carousel-item 
@@ -36,6 +47,9 @@
     computed: {
       exercises () {
         return this.$store.getters.featuredExercises
+      },
+      loading () {
+        return this.$store.getters.loading
       }
     },
     methods: {
