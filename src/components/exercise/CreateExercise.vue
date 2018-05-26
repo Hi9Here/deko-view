@@ -33,13 +33,8 @@
           </v-layout>
           <v-layout row>
             <v-flex xs12 sm6 offset-sm3>
-              <v-text-field
-              name="imageUrl"
-              label="Image Url"
-              id="image-url"
-              v-model="imageUrl"
-              >
-              </v-text-field>
+              <v-btn raised @click="onPickFile">Upload Image</v-btn>
+              <input type="file" style="display:none" ref="fileInput" accept="images/*">
             </v-flex>
           </v-layout>
           <v-layout row>
@@ -114,9 +109,12 @@
           muscle: this.muscle,
           description: this.description
         }
-        console.log(exerciseData);
         this.$store.dispatch('createExercise', exerciseData )
         this.$router.push('/exercises')
+      },
+      onPickFile () {
+        console.log('button firing')
+        this.$refs.fileInput.click()
       }
     }
   }
