@@ -79,23 +79,41 @@ export const store = new Vuex.Store({
       const exercise = {
         title: payload.title,
         freq: payload.freq,
-        imageUrl: payload.imageUrl,
         description: payload.description,
         muscle: payload.muscle,
         creatorId: getters.user.id
       }
+      let imageUrl
+      let key
       firebase.database().ref('exercises').push(exercise)
         .then((data) => {
-          const key = data.key
+          key = data.key
+          return key
+        })
+        .then(key => {
+          const filename = payload.image.name
+          const ext = filename.slice(filename.lastIndexOf('.'))
+          return firebase.storage().ref('exercises/' + key + ext).put(payload.image)
+        })
+        .then(fileData => {
+          fileData.ref.getDownloadURL()
+            .then(url => {
+              imageUrl = url
+              console.log('File available at', url);
+              return firebase.database().ref('exercises').child(key).update({ imageUrl: url })
+            })
+        })
+        .then(() => {
           commit('createExercise', {
             ...exercise,
+            imageUrl: imageUrl,
             id: key
           })
         })
         .catch((error) => {
           console.log(error)
-          commit('setLoading', false)
         })
+
     },
     signUserUp({ commit }, payload) {
       commit('setLoading', true)

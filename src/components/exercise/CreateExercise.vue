@@ -34,7 +34,13 @@
           <v-layout row>
             <v-flex xs12 sm6 offset-sm3>
               <v-btn raised @click="onPickFile">Upload Image</v-btn>
-              <input type="file" style="display:none" ref="fileInput" accept="images/*">
+              <input 
+                type="file" 
+                style="display:none" 
+                ref="fileInput" 
+                accept="images/*"
+                @change="onFilePicked"
+                >
             </v-flex>
           </v-layout>
           <v-layout row>
@@ -88,7 +94,8 @@
         freq: 0,
         imageUrl: '',
         muscle: '',
-        description: ''
+        description: '',
+        image: null
       }
     },
     computed: {
@@ -102,10 +109,16 @@
     },
     methods: {
       onCreateExercise () {
+        // if (!this.formIsValid) {
+        //   return
+        // }
+        // if (!this.image) {
+        //   return
+        // }   
         const exerciseData = {
           title: this.title,
           freq: this.freq,
-          imageUrl: this.imageUrl,
+          image: this.image,
           muscle: this.muscle,
           description: this.description
         }
@@ -115,6 +128,20 @@
       onPickFile () {
         console.log('button firing')
         this.$refs.fileInput.click()
+      },
+      onFilePicked (event) {
+        const files = event.target.files
+        let filename = files[0].name
+        if (filename.lastIndexOf('.') <= 0) {
+          return alert('Please Add a Valid File!')
+        }
+        const fileReader = new FileReader()
+
+        fileReader.addEventListener('load', () => {
+          this.imageUrl = fileReader.result
+        })
+        fileReader.readAsDataURL(files[0])
+        this.image = files[0]
       }
     }
   }
