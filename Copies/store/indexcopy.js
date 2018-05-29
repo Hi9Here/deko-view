@@ -7,20 +7,20 @@ Vue.use(Vuex)
 export const store = new Vuex.Store({
   state: {
     loadedExercises: [{
-        imageUrl: 'http://cdn2.coachmag.co.uk/sites/coachmag/files/2017/05/bench-press_0.jpg',
-        id: 'cdfgshdjf',
-        title: 'Chest Press',
-        freq: 3,
-        muscle: 'Upper',
-        description: 'Just some text that I am throwing in'
+        imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/4/47/New_york_times_square-terabass.jpg',
+        id: 'afajfjadfaadfa323',
+        title: 'Exercise in New York',
+        date: new Date(),
+        location: 'New York',
+        description: 'New York, New York!'
       },
       {
-        imageUrl: 'http://www.ibodz.com/files/exerciseimages/abdominal-crunch-with-raised-legs-1.JPG',
-        id: 'fgdhfj',
-        title: 'Ab Crunch',
-        freq: 2,
-        muscle: 'Middle',
-        description: 'This is the ab crunch text, just so you know'
+        imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/7/7a/Paris_-_Blick_vom_gro%C3%9Fen_Triumphbogen.jpg',
+        id: 'aadsfhbkhlk1241',
+        title: 'Exercise in Paris',
+        date: new Date(),
+        location: 'Paris',
+        description: 'It\'s Paris!'
       }
     ],
     user: null,
@@ -57,6 +57,9 @@ export const store = new Vuex.Store({
       if (payload.description) {
         exercise.description = payload.description
       }
+      if (payload.date) {
+        exercise.date = payload.date
+      }
     },
     setUser(state, payload) {
       state.user = payload
@@ -67,7 +70,7 @@ export const store = new Vuex.Store({
     setError(state, payload) {
       state.error = payload
     },
-    clearError(state, payload) {
+    clearError(state) {
       state.error = null
     }
   },
@@ -116,9 +119,8 @@ export const store = new Vuex.Store({
               title: obj[key].title,
               description: obj[key].description,
               imageUrl: obj[key].imageUrl,
-              muscle: obj[key].muscle,
-              freq: obj[key].freq,
-              account: obj[key].account,
+              date: obj[key].date,
+              location: obj[key].location,
               creatorId: obj[key].creatorId
             })
           }
@@ -128,17 +130,16 @@ export const store = new Vuex.Store({
         .catch(
           (error) => {
             console.log(error)
-            commit('setLoading', true)
+            commit('setLoading', false)
           }
         )
     },
     createExercise({ commit, getters }, payload) {
       const exercise = {
         title: payload.title,
-        freq: payload.freq,
+        location: payload.location,
         description: payload.description,
-        muscle: payload.muscle,
-        account: payload.account,
+        date: payload.date.toISOString(),
         creatorId: getters.user.id
       }
       let imageUrl
@@ -151,15 +152,11 @@ export const store = new Vuex.Store({
         .then(key => {
           const filename = payload.image.name
           const ext = filename.slice(filename.lastIndexOf('.'))
-          return firebase.storage().ref('exercises/' + key + ext).put(payload.image)
+          return firebase.storage().ref('exercises/' + key + '.' + ext).put(payload.image)
         })
         .then(fileData => {
-          fileData.ref.getDownloadURL()
-            .then(url => {
-              imageUrl = url
-              console.log('File available at', url);
-              return firebase.database().ref('exercises').child(key).update({ imageUrl: url })
-            })
+          imageUrl = fileData.metadata.downloadURLs[0]
+          return firebase.database().ref('exercises').child(key).update({ imageUrl: imageUrl })
         })
         .then(() => {
           commit('createExercise', {
@@ -168,8 +165,12 @@ export const store = new Vuex.Store({
             id: key
           })
         })
+        .catch((error) => {
+          console.log(error)
+        })
+        // Reach out to firebase and store it
     },
-    upDateExerciseData({ commit }, payload) {
+    updateExerciseData({ commit }, payload) {
       commit('setLoading', true)
       const updateObj = {}
       if (payload.title) {
@@ -177,6 +178,9 @@ export const store = new Vuex.Store({
       }
       if (payload.description) {
         updateObj.description = payload.description
+      }
+      if (payload.date) {
+        updateObj.date = payload.date
       }
       firebase.database().ref('exercises').child(payload.id).update(updateObj)
         .then(() => {
@@ -187,7 +191,6 @@ export const store = new Vuex.Store({
           console.log(error)
           commit('setLoading', false)
         })
-
     },
     signUserUp({ commit }, payload) {
       commit('setLoading', true)
@@ -251,10 +254,9 @@ export const store = new Vuex.Store({
     }
   },
   getters: {
-    // Changed with 
     loadedExercises(state) {
       return state.loadedExercises.sort((exerciseA, exerciseB) => {
-        return exerciseA.freq == exerciseB.freq ? 0 : +(exerciseA.freq > exerciseB.freq) || -1;
+        return exerciseA.date > exerciseB.date
       })
     },
     featuredExercises(state, getters) {

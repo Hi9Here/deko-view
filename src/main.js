@@ -6,8 +6,8 @@ import Vuetify from 'vuetify'
 import 'vuetify/dist/vuetify.min.css'
 import { store } from './store'
 import AlertCmp from './components/shared/Alert.vue'
-import EditExerciseDetailsDialog from './components/exercise/Edit/EditExerciseDetailsDialog'
-import ExerciseRegisterDialog from './components/exercise/Register/RegisterDialog'
+import EditExerciseDetailsDialog from './components/exercise/Edit/EditExerciseDetailsDialog.vue'
+import RegisterDialog from './components/exercise/Register/RegisterDialog.vue'
 
 Vue.use(Vuetify)
 
@@ -15,7 +15,7 @@ Vue.config.productionTip = false
 
 Vue.component('app-alert', AlertCmp)
 Vue.component('app-edit-exercise-details-dialog', EditExerciseDetailsDialog)
-Vue.component('app-exercise-register-dialog', ExerciseRegisterDialog)
+Vue.component('app-exercise-register-dialog', RegisterDialog)
 
 /* eslint-disable no-new */
 new Vue({
