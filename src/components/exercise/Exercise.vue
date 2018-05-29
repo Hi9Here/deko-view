@@ -40,7 +40,7 @@
             </v-card-text>
             <v-card-actions>
               <v-spacer></v-spacer>
-              <v-btn>Add</v-btn>
+              <app-exercise-register-dialog :exerciseId="exercise.id"></app-exercise-register-dialog>
             </v-card-actions>
         </v-card>
       </v-flex>
