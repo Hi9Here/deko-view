@@ -19,6 +19,7 @@
                     <div>
                       <h3>{{ exercise.title }}</h3>
                       <span>Frequency {{ exercise.freq }}</span><br>
+                      <span>Account {{ exercise.account }}</span><br>
                       <span>Body Part {{ exercise.muscle }}</span><br>
                     </div>
                   </div>

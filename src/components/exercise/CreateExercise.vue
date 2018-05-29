@@ -63,6 +63,18 @@
           <v-layout row>
             <v-flex xs12 sm6 offset-sm3>
               <v-text-field
+              name="account"
+              label="Account"
+              id="account"
+              v-model="account"
+              required
+              >
+              </v-text-field>
+            </v-flex>
+          </v-layout>
+          <v-layout row>
+            <v-flex xs12 sm6 offset-sm3>
+              <v-text-field
               name="description"
               label="Description"
               id="description"
@@ -120,6 +132,7 @@
           freq: this.freq,
           image: this.image,
           muscle: this.muscle,
+          account: this.account,
           description: this.description
         }
         this.$store.dispatch('createExercise', exerciseData )
