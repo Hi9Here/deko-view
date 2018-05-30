@@ -107,6 +107,7 @@
         imageUrl: '',
         muscle: '',
         description: '',
+        account: '',
         image: null
       }
     },

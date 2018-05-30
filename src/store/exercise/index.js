@@ -8,6 +8,7 @@ export default {
         title: 'Chest Press',
         freq: 3,
         muscle: 'Upper',
+        account: 'serene',
         description: 'Just some text that I am throwing in'
       },
       {
@@ -16,6 +17,7 @@ export default {
         title: 'Ab Crunch',
         freq: 2,
         muscle: 'Middle',
+        account: 'serene',
         description: 'This is the ab crunch text, just so you know'
       }
     ],
