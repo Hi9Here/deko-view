@@ -7,8 +7,8 @@
       <v-container>
         <v-layout row wrap>
           <v-flex xs12>
-            <v-card-title v-if="userIsRegistered">Unregister from Exercise?</v-card-title>
-            <v-card-title v-else>Register for Exercise?</v-card-title>
+            <v-card-title v-if="userIsRegistered">Deselect Exercise?</v-card-title>
+            <v-card-title v-else>Select Exercise?</v-card-title>
           </v-flex>
         </v-layout>
         <v-divider></v-divider>
