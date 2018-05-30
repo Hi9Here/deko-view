@@ -26,11 +26,12 @@ new Vue({
   template: '<App/>',
   created() {
     firebase.initializeApp({
-      apiKey: 'AIzaSyDiXAmAbzhAJx02ctlSiyUqX2_lAP2xPjw',
-      authDomain: 'deko-fit-dev.firebaseapp.com',
-      databaseURL: 'https://deko-fit-dev.firebaseio.com',
-      projectId: 'deko-fit-dev',
-      storageBucket: 'deko-fit-dev.appspot.com'
+      apiKey: "AIzaSyD3HPMgDd4HwsmT57om-i8-tVUpb7B3qzY",
+      authDomain: "deko-prod.firebaseapp.com",
+      databaseURL: "https://deko-prod.firebaseio.com",
+      projectId: "deko-prod",
+      storageBucket: "deko-prod.appspot.com",
+      messagingSenderId: "322648727041"
     })
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
