@@ -2,7 +2,7 @@
   <v-container>
     <v-layout row wrap class="mb-2">
       <v-flex xs12 sm6 class="text-xs-center text-sm-right">
-        <v-btn large router to="/exercises" dark class="blue darken-2">Explore Exercises</v-btn>
+        <v-btn large router to="/exercises" dark class="blue darken-2">Explore Exercise</v-btn>
       </v-flex>
       <v-flex xs12 sm6 class="text-xs-center text-sm-left"> 
         <v-btn large router to="/exercises/new" dark class="blue darken-2">Create Exercise</v-btn>
@@ -36,7 +36,7 @@
     </v-layout>
     <v-layout row wrap class="mt-2">
       <v-flex xs12 class="text-xs-center">
-        <p>Join the Exercises</p>
+        <p>Join the Exercise</p>
       </v-flex>
     </v-layout>
   </v-container>

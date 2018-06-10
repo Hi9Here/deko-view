@@ -24,7 +24,7 @@
     <v-toolbar dark class="red darken-2">
       <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
       <v-toolbar-title>
-        <router-link to="/" tag="span" style="cursor: pointer">Deko Fit</router-link>
+        <router-link to="/" tag="span" style="cursor: pointer">Deko</router-link>
         </v-toolbar-title>
       <v-spacer></v-spacer>
       <v-toolbar-items class="hidden-xs-only">
@@ -64,8 +64,8 @@ export default {
       ]
       if (this.userIsAuthenticated) {
         menuItems =  [
-        { icon: 'fitness_center', title: 'Exercises', link: '/exercises'},
-        { icon: 'room', title: 'New Exercise', link: 'exercises/new'},
+        { icon: 'perm_media', title: 'Exercise', link: '/exercises'},
+        { icon: 'add_to_photos', title: 'New Exercise', link: 'exercises/new'},
         { icon: 'person', title: 'Profile', link: '/profile'},
         ]     
       }

@@ -8,7 +8,7 @@
               <v-flex xs5 sm4 md3>
                 <v-card-media
                   class="white--text"
-                  height="130px"
+                  height="150px"
                   :src="exercise.imageUrl"
                 >
                 </v-card-media>
@@ -17,13 +17,14 @@
                 <v-card-title>
                   <div>
                     <div>
-                      <h3>{{ exercise.title }}</h3>
-                      <span>Frequency {{ exercise.freq }}</span><br>
-                      <span>Account {{ exercise.account }}</span><br>
-                      <span>Body Part {{ exercise.muscle }}</span><br>
+                      <h2>{{ exercise.title }}</h2>
                     </div>
                   </div>
                 </v-card-title>
+                <v-card-text>
+                      <h3>{{ exercise.muscle }}</h3>
+                      <h3>Freq {{ exercise.freq }}</h3>
+                </v-card-text>
                 <v-card-actions>
                   <v-btn flat :to="'/exercises/' + exercise.id">
                     <v-icon left light>arrow_forward</v-icon>
@@ -48,3 +49,23 @@
     }
   }
 </script>
+
+<style scoped>
+  h2 {
+    font-weight: 300;
+  }
+  h3 {
+    font-weight: 300;
+  }
+  .card__title {
+    padding: 0px 20px 0px 16px;
+  }
+  @media only screen and (max-width: 599px){
+    .container {
+        padding: 12px 10px 0px 10px;
+        margin: 0px 0px 5px 0px;
+  }
+  }
+
+
+</style>

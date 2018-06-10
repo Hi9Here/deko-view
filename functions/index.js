@@ -33,7 +33,7 @@ const bot = dialogflow({
 });
 
 bot.intent('Default Welcome Intent', (conv) => {
-  conv.ask('V83')
+  conv.ask('What exercises do you want me to show or tell you about?')
 })
 
 // Start audio intent
@@ -104,10 +104,10 @@ bot.intent('show', (conv, { exerciseTitle }) => {
             })
           }));
           conv.ask(new SimpleResponse({
-            speech: 'Do you want to favorite this, hear the audio version or finish?',
-            text: 'Do you want to favorite this, hear the audio version or finish?',
+            speech: 'Do you want me to tell you how to do this exercise',
+            text: `Do you want me to tell you of to do ${exerciseTitle}?`,
           }));
-          conv.ask(new Suggestions([`Audio`, `Favorite`, `Finish`]));
+          conv.ask(new Suggestions([`Favorite`, `Finish`]));
           return
         }
         return
@@ -174,7 +174,7 @@ bot.intent('showprofile', (conv) => {
           speech: 'Here is your information. Would you like to change weight or height?',
           text: 'Here is your information. Would you like to change weight or height?',
         }));
-        conv.ask(new Suggestions([`Change Weight`, `Change Height`]));
+        conv.ask(new Suggestions([`Change`, `Finish`]));
         return
       }
       return
@@ -184,6 +184,13 @@ bot.intent('showprofile', (conv) => {
     });
 });
 // End profile measurements
+
+//Fallback
+bot.intent('Default Fallback Intent', (conv) => {
+  conv.ask('What exercises do you want me to show or tell you about again?')
+});
+
+// end of Fallback
 
 
 bot.intent('media status', (conv) => {

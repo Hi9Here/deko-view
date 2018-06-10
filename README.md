@@ -1,6 +1,6 @@
-# deko-fit
+# Fit List
 
-> View your favorite exercises
+> View your favorite media
 
 ## Build Setup
 
